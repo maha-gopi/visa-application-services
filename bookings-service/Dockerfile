@@ -7,7 +7,7 @@ COPY src ./src
 
 RUN mvn -q -DskipTests clean package
 
-FROM openjdk:17-jre
+FROM amazoncorretto:17
 
 WORKDIR /app
 
