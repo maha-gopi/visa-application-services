@@ -1,4 +1,4 @@
-FROM maven:3.9-openjdk-17 as build
+FROM maven:3.9-amazoncorretto-17 as build
 
 WORKDIR /app
 
