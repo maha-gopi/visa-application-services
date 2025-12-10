@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: value-added-services-service
+  
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:dpg-d4pe89muk2gs73dcir30-a.singapore-postgres.render.com}:${DB_PORT:5432}/${DB_NAME:vams_c1jg}
+    username: ${DB_USER:admin}
+    password: ${DB_PASSWORD:9nmWXfH5tcXGwulbKjhm1dxxRJXxv7oz}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+server:
+  port: ${SERVER_PORT:8090}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    root: INFO
+    com.vfsglobal: DEBUG
+
+otel:
+  service:
+    name: value-added-services-service
+  exporter:
+    otlp:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4317}
+
